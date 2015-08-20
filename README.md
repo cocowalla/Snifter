@@ -6,19 +6,19 @@ Snifter is a raw socket IP packet capturing tool for Windows, with a tiny CPU an
 Output is written in [PCAPNG](https://github.com/pcapng/pcapng) format, and you can filter captured packets based on protocol, source/destination address and source/destination port
 
 Why?
-====
+----
 
 You can't capture on the local loopback address 127.0.0.1 with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a raw socket sniffer like Snifter.
 
 Limitations
-===========
+-----------
 
 You must run Snifter with elevated privileges - this is a Windows requirement to create raw sockets.
 
 For now at least, Snifter only supports IPv4. It should be straightforward to add support for IPv6, but I don't use IPv6 yet, so haven't added it.
 
 Usage
-=====
+-----
 
 ````
 snifter.exe -i x -f filename
