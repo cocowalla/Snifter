@@ -8,7 +8,7 @@ Output is written in [PCAPNG](https://github.com/pcapng/pcapng) format, and you 
 Why?
 ----
 
-You can't capture on the local loopback address 127.0.0.1 with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a raw socket sniffer like Snifter.
+You can't capture on the local loopback address `127.0.0.1` with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a raw socket sniffer like Snifter.
 
 Limitations
 -----------
@@ -16,6 +16,8 @@ Limitations
 You must run Snifter with elevated privileges - this is a Windows requirement to create raw sockets.
 
 For now at least, Snifter only supports IPv4. It should be straightforward to add support for IPv6, but I don't use IPv6 yet, so haven't added it.
+
+If you want to capture loopback traffic, it's important that your apps are communicating specifically with `127.0.0.1` - *not* `localhost`.
 
 Usage
 -----
