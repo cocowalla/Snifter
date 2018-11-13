@@ -19,8 +19,8 @@ namespace Snifter
         public int? FilterProtocol { get; set; }
         public IPAddress FilterSourceAddress { get; set; }
         public IPAddress FilterDestAddress { get; set; }
-        public short? FilterSourcePort { get; set; }
-        public short? FilterDestPort { get; set; }
+        internal UInt16? FilterSourcePort { get; set; }
+        internal UInt16? FilterDestPort { get; set; }
 
         public AppOptions()
         {
@@ -34,8 +34,8 @@ namespace Snifter
                 { "p=|protocol", "Filter packets by IANA registered protocol number", x => this.FilterProtocol = Int32.Parse(x) },
                 { "s=|source-address", "Filter packets by source IP address", x => this.FilterSourceAddress = IPAddress.Parse(x) },
                 { "d=|dest-address", "Filter packets by destination IP address", x => this.FilterDestAddress = IPAddress.Parse(x) },
-                { "x=|source-port", "Filter packets by source port number", x => this.FilterSourcePort = Int16.Parse(x) },
-                { "y=|dest-port", "Filter packets by destination port number", x => this.FilterDestPort = Int16.Parse(x) },
+                { "x=|source-port", "Filter packets by source port number", x => this.FilterSourcePort = UInt16.Parse(x) },
+                { "y=|dest-port", "Filter packets by destination port number", x => this.FilterDestPort = UInt16.Parse(x) },
                 { "h|?|help", "Show command line options", x => this.ShowHelp = x != null }
             };
 

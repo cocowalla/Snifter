@@ -10,8 +10,8 @@ namespace Snifter
         public int Protocol { get; private set; }
         public IPAddress SourceAddress { get; private set; }
         public IPAddress DestAddress { get; private set; }
-        public short SourcePort { get; private set; }
-        public short DestPort { get; private set; }
+        internal UInt16 SourcePort { get; private set; }
+        internal UInt16 DestPort { get; private set; }
 
         public IPPacket(byte[] data)
         {
@@ -29,8 +29,8 @@ namespace Snifter
 
                 if (Enum.IsDefined(typeof (ProtocolsWithPort), this.Protocol))
                 {
-                    this.SourcePort = BitConverter.ToInt16(data, this.HeaderLength);
-                    this.DestPort = BitConverter.ToInt16(data, this.HeaderLength + 2);
+                    this.SourcePort = BitConverter.ToUInt16(data, this.HeaderLength);
+                    this.DestPort = BitConverter.ToUInt16(data, this.HeaderLength + 2);
                 }
             }
         }
