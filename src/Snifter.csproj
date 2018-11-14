@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Raw Socket Sniffer</Description>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <Authors>Colin Anderson</Authors>
+    <Copyright>Copyright © Colin Anderson 2015</Copyright>
+    <TargetFramework>net45</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AssemblyName>Snifter</AssemblyName>
+    <RootNamespace>Snifter</RootNamespace>
+    <RepositoryUrl>http://github.com/cocowalla/snifter</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

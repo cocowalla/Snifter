@@ -17,7 +17,7 @@ namespace Snifter.Outputs.PcapNg
         {
             this.nic = nic;
             this.fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
-            this.writer = new BinaryWriter(fileStream);
+            this.writer = new BinaryWriter(this.fileStream);
             this.WriteHeader();
         }
 

@@ -6,6 +6,9 @@ namespace Snifter.Outputs.PcapNg
     public class EnhancedPacketBlock : BaseBlock
     {
         private readonly TimestampedData timestampedData;
+        private static readonly byte[] BlockType = { 0x06, 0x00, 0x00, 0x00 };
+        private static readonly byte[] InterfaceId = { 0x00, 0x00, 0x00, 0x00 };
+        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         public EnhancedPacketBlock(TimestampedData timestampedData)
         {
@@ -16,15 +19,8 @@ namespace Snifter.Outputs.PcapNg
         {
             byte[] blockData;
 
-            // Block Type
-            var blockType = new byte[] { 0x06, 0x00, 0x00, 0x00 };
-
-            // Interface ID (0)
-            var interfaceId = new byte[] { 0x00, 0x00, 0x00, 0x00 };
-
             // Timestamp
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var timestamp = (long)(this.timestampedData.Timestamp - epoch).TotalMilliseconds;
+            var timestamp = (long)(this.timestampedData.Timestamp - Epoch).TotalMilliseconds;
             var timestampHigh = (int)(timestamp >> 32);
             var timestampLow = (int)timestamp;
 
@@ -41,19 +37,17 @@ namespace Snifter.Outputs.PcapNg
             var blockLength = 32 + packetData.Length;
 
             using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms))
             {
-                using (var writer = new BinaryWriter(ms))
-                {
-                    writer.Write(blockType);
-                    writer.Write(blockLength);
-                    writer.Write(interfaceId);
-                    writer.Write(timestampHigh);
-                    writer.Write(timestampLow);
-                    writer.Write(capturedLength);
-                    writer.Write(packetLength);
-                    writer.Write(packetData);
-                    writer.Write(blockLength);
-                }
+                writer.Write(BlockType);
+                writer.Write(blockLength);
+                writer.Write(InterfaceId);
+                writer.Write(timestampHigh);
+                writer.Write(timestampLow);
+                writer.Write(capturedLength);
+                writer.Write(packetLength);
+                writer.Write(packetData);
+                writer.Write(blockLength);
 
                 blockData = ms.ToArray();
             }

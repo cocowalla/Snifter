@@ -4,8 +4,8 @@ namespace Snifter
 {
     public class TimestampedData
     {
-        public DateTime Timestamp { get; private set; }
-        public byte[] Data { get; private set; }
+        public DateTime Timestamp { get; }
+        public byte[] Data { get; }
 
         public TimestampedData(DateTime timestamp, byte[] data)
 	    {
