@@ -1,14 +1,29 @@
 Snifter
 =======
 
-Snifter is a raw socket IP packet capturing tool for Windows, with a tiny CPU and memory footprint.
-
-Output is written in [PCAPNG](https://github.com/pcapng/pcapng) format, and you can filter captured packets based on protocol, source/destination address and source/destination port
+<table border="0">
+ <tr>
+    <td>
+      <pre>
+      __.---,__
+   .-`         '-,__
+ &/           ',_\ _\
+ /               '',_
+ |    .            (")
+ |__.`'-..--|__|--``   Snifter
+      </pre>
+    </td>
+    <td>
+      <p>Snifter is a raw socket IP packet capturing tool for Windows, with a tiny CPU and memory footprint.</p>
+      <p>Output is written in <a href="https://github.com/pcapng/pcapng">PCAPNG</a> format, and you can filter captured packets based on protocol, source/destination address and source/destination port.</p>
+    </td>
+ </tr>
+</table>
 
 Why?
 ----
 
-You can't capture on the local loopback address `127.0.0.1` with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a raw socket sniffer like Snifter.
+You can't capture on the local loopback address `127.0.0.1` with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a *raw socket* sniffer, like Snifter.
 
 Limitations
 -----------

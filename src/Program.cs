@@ -93,6 +93,14 @@ namespace Snifter
 
         private static void ShowHelp(AppOptions appOptions)
         {
+            Console.WriteLine(@"      __.---,__                ");
+            Console.WriteLine(@"   .-`         '-,__           ");
+            Console.WriteLine(@" &/           ',_\ _\          ");
+            Console.WriteLine(@" /               '',_          ");
+            Console.WriteLine(@" |    .            ("")         ");
+            Console.WriteLine(@" |__.`'-..--|__|--``   Snifter ");
+            Console.WriteLine();
+
             Console.WriteLine("Usage:");
             Console.WriteLine("snifter -i x -f filename");
             Console.WriteLine();
