@@ -34,8 +34,8 @@ namespace Snifter
                 { "p=|protocol", "Filter packets by IANA registered protocol number", x => this.FilterProtocol = Int32.Parse(x) },
                 { "s=|source-address", "Filter packets by source IP address", x => this.FilterSourceAddress = IPAddress.Parse(x) },
                 { "d=|dest-address", "Filter packets by destination IP address", x => this.FilterDestAddress = IPAddress.Parse(x) },
-                { "x=|source-port", "Filter packets by source port number", x => this.FilterSourcePort = UInt16.Parse(x) },
-                { "y=|dest-port", "Filter packets by destination port number", x => this.FilterDestPort = UInt16.Parse(x) },
+                { "x=|source-port", "Filter packets by source port number", x => this.FilterSourcePort = ushort.Parse(x) },
+                { "y=|dest-port", "Filter packets by destination port number", x => this.FilterDestPort = ushort.Parse(x) },
                 { "h|?|help", "Show command line options", x => this.ShowHelp = x != null }
             };
 
