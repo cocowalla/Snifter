@@ -10,8 +10,8 @@ namespace Snifter
         public int Protocol { get; private set; }
         public IPAddress SourceAddress { get; private set; }
         public IPAddress DestAddress { get; private set; }
-        internal UInt16 SourcePort { get; private set; }
-        internal UInt16 DestPort { get; private set; }
+        internal ushort SourcePort { get; private set; }
+        internal ushort DestPort { get; private set; }
 
         public IPPacket(byte[] data)
         {

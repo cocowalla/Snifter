@@ -19,8 +19,8 @@ namespace Snifter
         public int? FilterProtocol { get; set; }
         public IPAddress FilterSourceAddress { get; set; }
         public IPAddress FilterDestAddress { get; set; }
-        internal UInt16? FilterSourcePort { get; set; }
-        internal UInt16? FilterDestPort { get; set; }
+        internal ushort? FilterSourcePort { get; set; }
+        internal ushort? FilterDestPort { get; set; }
 
         public AppOptions()
         {
