@@ -39,12 +39,27 @@ namespace Snifter
             this.receivePool = new ConcurrentStack<SocketAsyncEventArgs>();
             var endPoint = new IPEndPoint(nic.IPAddress, 0);
 
+            // Capturing at the IP level is not supported on Linux
+            // https://github.com/dotnet/corefx/issues/25115
+            // https://github.com/dotnet/corefx/issues/30197
+            var protocolType = SystemInformation.IsWindows
+                ? ProtocolType.IP
+                : ProtocolType.Tcp;
+
             // IPv4
-			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
+			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, protocolType);
             this.socket.Bind(endPoint);
 			this.socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
 
-            // Enter promiscuous mode
+            // Enter promiscuous mode on Windows only
+            if (SystemInformation.IsWindows)
+            {
+                EnterPromiscuousMode();
+            }
+        }
+
+        private void EnterPromiscuousMode()
+        {
             try
             {
                 this.socket.IOControl(IOControlCode.ReceiveAll, BitConverter.GetBytes(1), new byte[4]);

@@ -14,7 +14,7 @@ Snifter
       </pre>
     </td>
     <td>
-      <p>Snifter is a raw socket IP packet capturing tool for Windows, with a tiny CPU and memory footprint.</p>
+      <p>Snifter is a raw socket IP packet capturing tool for Windows and Linux, with a tiny CPU and memory footprint.</p>
       <p>Output is written in <a href="https://github.com/pcapng/pcapng">PCAPNG</a> format, and you can filter captured packets based on protocol, source/destination address and source/destination port.</p>
     </td>
  </tr>
@@ -23,16 +23,20 @@ Snifter
 Why?
 ----
 
-You can't capture on the local loopback address `127.0.0.1` with a Windows packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a *raw socket* sniffer, like Snifter.
+On Windows, you can't capture on the local loopback address `127.0.0.1` with a packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a *raw socket* sniffer, like Snifter.
+
+Linux support was later added just because .NET Core makes it possible.
 
 Limitations
 -----------
 
-You must run Snifter with elevated privileges - this is a Windows requirement to create raw sockets.
+You must run Snifter with elevated privileges on Windows, or with `sudo` on Linux - this is a  requirement to create raw sockets.
 
 For now at least, Snifter only supports IPv4. It should be straightforward to add support for IPv6, but I don't use IPv6 yet, so haven't added it.
 
 If you want to capture loopback traffic, it's important that your apps are communicating specifically with `127.0.0.1` - *not* `localhost`.
+
+Note that Snifter is restricted to capturing TCP packets only on Linux.
 
 Usage
 -----
