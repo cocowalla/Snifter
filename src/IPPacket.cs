@@ -11,8 +11,8 @@ namespace Snifter
         public int Protocol { get; }
         public IPAddress SourceAddress { get; }
         public IPAddress DestAddress { get; }
-        public short SourcePort { get; }
-        public short DestPort { get; }
+        public ushort SourcePort { get; }
+        public ushort DestPort { get; }
 
         public IPPacket(byte[] data)
         {
@@ -20,7 +20,7 @@ namespace Snifter
             this.Version = versionAndLength >> 4;
 
             // Only parse IPv4 packets for now
-            if (this.Version != 4) 
+            if (this.Version != 4)
                 return;
 
             this.HeaderLength = (versionAndLength & 0x0F) << 2;
@@ -31,8 +31,8 @@ namespace Snifter
 
             if (Enum.IsDefined(typeof(ProtocolsWithPort), this.Protocol))
             {
-                this.SourcePort = BitConverter.ToInt16(data, this.HeaderLength);
-                this.DestPort = BitConverter.ToInt16(data, this.HeaderLength + 2);
+                this.SourcePort = BitConverter.ToUInt16(data, this.HeaderLength);
+                this.DestPort = BitConverter.ToUInt16(data, this.HeaderLength + 2);
             }
         }
     }
