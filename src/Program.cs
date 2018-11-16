@@ -12,9 +12,13 @@ namespace Snifter
         private static void Main(string[] args)
         {
             // You can only create raw sockets with elevated privileges
-            if (!IsElevated())
+            if (!SystemInformation.IsAdmin())
             {
-                Console.WriteLine("Please run with elevated prilileges");
+                var message = SystemInformation.IsWindows
+                    ? "Please run with elevated prilileges"
+                    : "Please run using sudo";
+
+                Console.WriteLine(message);
                 Environment.Exit(1);
             }
 
@@ -116,11 +120,6 @@ namespace Snifter
             {
                 Console.WriteLine("{0}\t{1}\t{2}", nicInfo.Index, nicInfo.IPAddress, nicInfo.Name);
             }
-        }
-
-        private static bool IsElevated()
-        {
-            return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
         }
     }
 }

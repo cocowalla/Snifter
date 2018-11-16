@@ -6,10 +6,9 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <Authors>Colin Anderson</Authors>
     <Copyright>Copyright © Colin Anderson 2015</Copyright>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFrameworks>net471;netcoreapp2.1</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>Snifter</AssemblyName>
     <RootNamespace>Snifter</RootNamespace>
     <RepositoryUrl>http://github.com/cocowalla/snifter</RepositoryUrl>
@@ -17,9 +16,17 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
+    <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
+
+    <!--Unfortunately, Mono.Posix.NETStandard forwards to Mono.Posix when compiling for net471, which doesn't necessarily exist on windows-->
+    <PackageReference Include="Mono.Posix" Version="5.4.0.201" Condition="'$(OS)' == 'Windows_NT'" />
+    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" Condition="$(OS) != 'Windows_NT'" />
   </ItemGroup>
 
 </Project>
