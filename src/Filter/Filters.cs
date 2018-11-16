@@ -16,12 +16,9 @@ namespace Snifter.Filter
 
         public bool IsMatch(T obj)
         {
-            if (this.FilterOperator == FilterOperator.AND)
-            {
-                return this.PropertyFilters.All(x => x.IsMatch(obj));
-            }
-
-            return this.PropertyFilters.Any(x => x.IsMatch(obj));
+            return this.FilterOperator == FilterOperator.AND 
+                ? this.PropertyFilters.All(x => x.IsMatch(obj)) 
+                : this.PropertyFilters.Any(x => x.IsMatch(obj));
         }
     }
 }

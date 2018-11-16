@@ -21,10 +21,8 @@ namespace Snifter
 
         public void AssignSegment(SocketAsyncEventArgs e)
         {
-            if ((this.nextOffset + this.segmentSize) > this.buffer.Length)
-            {
+            if (this.nextOffset + this.segmentSize > this.buffer.Length)
                 throw new IndexOutOfRangeException("Buffer exhausted");
-            }
 
             e.SetBuffer(this.buffer, this.nextOffset, this.segmentSize);
             this.nextOffset += this.segmentSize;

@@ -26,8 +26,8 @@ namespace Snifter
         private readonly Filters<IPPacket> filters;
         private readonly IOutput output;
 
-        public long PacketsObserved { get { return this.packetsObserved; } }
-        public long PacketsCaptured { get { return this.packetsCaptured; } }
+        public long PacketsObserved => this.packetsObserved;
+        public long PacketsCaptured => this.packetsCaptured;
 
         public SocketSniffer(NetworkInterfaceInfo nic, Filters<IPPacket> filters, IOutput output)
         {
@@ -59,10 +59,10 @@ namespace Snifter
         public void Start()
         {
             // Pre-allocate pool of SocketAsyncEventArgs for receive operations
-            for (int i = 0; i < MAX_RECEIVE; i++)
+            for (var i = 0; i < MAX_RECEIVE; i++)
             {
                 var socketEventArgs = new SocketAsyncEventArgs();
-                socketEventArgs.Completed += (e, args) => this.Receive(socketEventArgs);
+                socketEventArgs.Completed += (e, args) => Receive(socketEventArgs);
 
                 // Allocate space from the single, shared buffer
                 this.bufferManager.AssignSegment(socketEventArgs);
@@ -79,10 +79,7 @@ namespace Snifter
                 }
             });
 
-            Task.Factory.StartNew(() =>
-            {
-                StartReceiving();
-            });
+            Task.Factory.StartNew(StartReceiving);
         }
 
         public void Stop()
@@ -125,8 +122,7 @@ namespace Snifter
                 // Get SocketAsyncEventArgs from pool
                 this.maxReceiveEnforcer.Wait();
 
-                SocketAsyncEventArgs socketEventArgs;
-                if (!this.receivePool.TryPop(out socketEventArgs))
+                if (!this.receivePool.TryPop(out var socketEventArgs))
                 {
                     // Because we are controlling access to pooled SocketAsyncEventArgs, this
                     // *should* never happen...
@@ -135,7 +131,7 @@ namespace Snifter
 
                 // Returns true if the operation will complete asynchronously, or false if it completed
                 // synchronously
-                bool willRaiseEvent = this.socket.ReceiveAsync(socketEventArgs);
+                var willRaiseEvent = this.socket.ReceiveAsync(socketEventArgs);
 
                 if (!willRaiseEvent)
                 {
@@ -172,16 +168,18 @@ namespace Snifter
                     return;
                 }
 
-                if (e.BytesTransferred > 0)
+                if (e.BytesTransferred <= 0)
                 {
-                    Interlocked.Increment(ref this.packetsObserved);
-
-                    // Copy the bytes received into a new buffer
-                    var buffer = new byte[e.BytesTransferred];
-                    Buffer.BlockCopy(e.Buffer, e.Offset, buffer, 0, e.BytesTransferred);
-
-                    EnqueueOutput(new TimestampedData(DateTime.UtcNow, buffer));
+                    return;
                 }
+
+                Interlocked.Increment(ref this.packetsObserved);
+
+                // Copy the bytes received into a new buffer
+                var buffer = new byte[e.BytesTransferred];
+                Buffer.BlockCopy(e.Buffer, e.Offset, buffer, 0, e.BytesTransferred);
+
+                EnqueueOutput(new TimestampedData(DateTime.UtcNow, buffer));
             }
             catch (SocketException ex)
             {

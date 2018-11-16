@@ -10,7 +10,7 @@ namespace Snifter
         private readonly OptionSet optionSet;
 
         public bool ShowHelp { get; set; }
-        public string OptionsHelpText { get; private set; }
+        public string OptionsHelpText { get; }
 
         public int? InterfaceId { get; set; }
         public string Filename { get; set; }

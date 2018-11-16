@@ -5,11 +5,11 @@ using Snifter.Outputs.PcapNg;
 
 namespace Snifter
 {
-    class Program
+    internal class Program
     {
         private static bool isStopping;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // You can only create raw sockets with elevated privileges
             if (!IsElevated())
@@ -28,9 +28,9 @@ namespace Snifter
 
             var nics = NetworkInterfaceInfo.GetInterfaces();
 
-            if ((!appOptions.InterfaceId.HasValue) || 
-                (appOptions.InterfaceId > nics.Count - 1) || 
-                (appOptions.InterfaceId < 0))
+            if (!appOptions.InterfaceId.HasValue || 
+                appOptions.InterfaceId > nics.Count - 1 || 
+                appOptions.InterfaceId < 0)
             {
                 Console.WriteLine("Invalid interface ID");
                 ShowHelp(appOptions);
@@ -93,6 +93,14 @@ namespace Snifter
 
         private static void ShowHelp(AppOptions appOptions)
         {
+            Console.WriteLine(@"      __.---,__                ");
+            Console.WriteLine(@"   .-`         '-,__           ");
+            Console.WriteLine(@" &/           ',_\ _\          ");
+            Console.WriteLine(@" /               '',_          ");
+            Console.WriteLine(@" |    .            ("")         ");
+            Console.WriteLine(@" |__.`'-..--|__|--``   Snifter ");
+            Console.WriteLine();
+
             Console.WriteLine("Usage:");
             Console.WriteLine("snifter -i x -f filename");
             Console.WriteLine();

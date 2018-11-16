@@ -6,7 +6,7 @@ namespace Snifter.Outputs.PcapNg
 {
     public abstract class BaseBlock : IBlock
     {
-        protected byte[] GetOptionBytes(int code, string value)
+        protected static byte[] GetOptionBytes(int code, string value)
         {
             byte[] optionData;
 
@@ -16,21 +16,19 @@ namespace Snifter.Outputs.PcapNg
             PadToMultipleOf(ref optionValue, 4);
 
             using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms))
             {
-                using (var writer = new BinaryWriter(ms))
-                {
-                    writer.Write(optionCode, 0, 2);
-                    writer.Write(optionValueLength, 0, 2);
-                    writer.Write(optionValue);
+                writer.Write(optionCode, 0, 2);
+                writer.Write(optionValueLength, 0, 2);
+                writer.Write(optionValue);
 
-                    optionData = ms.ToArray();
-                }
+                optionData = ms.ToArray();
             }
 
             return optionData;
         }
 
-        protected byte[] GetOptionBytes(int code, byte[] value)
+        protected static byte[] GetOptionBytes(int code, byte[] value)
         {
             byte[] optionData;
 
@@ -39,15 +37,13 @@ namespace Snifter.Outputs.PcapNg
             var optionValue = PadToMultipleOf(value, 4);
 
             using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms))
             {
-                using (var writer = new BinaryWriter(ms))
-                {
-                    writer.Write(optionCode, 0, 2);
-                    writer.Write(optionValueLength, 0, 2);
-                    writer.Write(optionValue);
+                writer.Write(optionCode, 0, 2);
+                writer.Write(optionValueLength, 0, 2);
+                writer.Write(optionValue);
 
-                    optionData = ms.ToArray();
-                }
+                optionData = ms.ToArray();
             }
 
             return optionData;
