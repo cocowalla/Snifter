@@ -25,18 +25,20 @@ Why?
 
 On Windows, you can't capture on the local loopback address `127.0.0.1` with a packet capture driver like [WinPcap](https://wiki.wireshark.org/WinPcap) - but you can by using a *raw socket* sniffer, like Snifter.
 
-Linux support was later added just because .NET Core makes it possible.
+Additionally, Snifter is a cross-platform, portable tool that doesn't require any drivers to be installed.
+
+Snifter started life as a Windows-only tool, and Linux support was later added just because .NET Core makes it possible.
 
 Limitations
 -----------
 
-You must run Snifter with elevated privileges on Windows, or with `sudo` on Linux - this is a  requirement to create raw sockets.
+You must run Snifter with elevated privileges on Windows, or with `sudo` on Linux - this is an OS-level requirement to create raw sockets.
 
 For now at least, Snifter only supports IPv4. It should be straightforward to add support for IPv6, but I don't use IPv6 yet, so haven't added it.
 
 If you want to capture loopback traffic, it's important that your apps are communicating specifically with `127.0.0.1` - *not* `localhost`.
 
-Note that Snifter is restricted to capturing TCP packets only on Linux.
+Note that Snifter is restricted to only capturing *TCP* packets on Linux.
 
 Usage
 -----
