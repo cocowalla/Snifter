@@ -31,8 +31,9 @@ namespace Snifter
 
             if (Enum.IsDefined(typeof(ProtocolsWithPort), this.Protocol))
             {
-                this.SourcePort = BitConverter.ToUInt16(data, this.HeaderLength);
-                this.DestPort = BitConverter.ToUInt16(data, this.HeaderLength + 2);
+                // Ensure big-endian
+                this.SourcePort = (ushort)((data[this.HeaderLength] << 8) | data[this.HeaderLength + 1]);
+                this.DestPort = (ushort)((data[this.HeaderLength + 2] << 8) | data[this.HeaderLength + 3]);
             }
         }
     }
