@@ -230,3 +230,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Rider
+.idea/

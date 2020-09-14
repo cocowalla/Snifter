@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snifter", "src\Snifter.csproj", "{BD011029-7C87-495C-A135-BDA549DB03CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snifter", "src\Snifter\Snifter.csproj", "{BD011029-7C87-495C-A135-BDA549DB03CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "src\App\App.csproj", "{E76A7FDE-F7FA-49BC-AC9C-1B1ADEDBC35A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BD011029-7C87-495C-A135-BDA549DB03CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD011029-7C87-495C-A135-BDA549DB03CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD011029-7C87-495C-A135-BDA549DB03CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E76A7FDE-F7FA-49BC-AC9C-1B1ADEDBC35A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E76A7FDE-F7FA-49BC-AC9C-1B1ADEDBC35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E76A7FDE-F7FA-49BC-AC9C-1B1ADEDBC35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E76A7FDE-F7FA-49BC-AC9C-1B1ADEDBC35A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
