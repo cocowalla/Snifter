@@ -34,7 +34,7 @@ Install the [Snifter](https://www.nuget.org/packages/Snifter) package from NuGet
 Install-Package Snifter
 ```
 
-You can see an example of how to use the library in the `Snifter.App` code in `src/App`, including capturing, parsing, filtering and saving packets.
+You can see an example of how to use the library in the `Snifter.App` code in <a href="https://github.com/cocowalla/Snifter/tree/master/src/App">`src/App`</a>, including capturing, parsing, filtering and saving packets.
 
 ## App Limitations
 You must run `Snifter.App` with elevated privileges on Windows, or with `sudo` on Linux - this is an OS-level requirement to create raw sockets.
