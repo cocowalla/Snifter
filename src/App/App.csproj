@@ -3,6 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
+        <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+        <PublishTrimmed>true</PublishTrimmed>
 
         <AssemblyName>Snifter.App</AssemblyName>
         <RootNamespace>Snifter.App</RootNamespace>
